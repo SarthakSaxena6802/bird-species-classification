@@ -1,0 +1,16 @@
+# Data and big files: never go to GitHub
+data/*
+*.wav
+*.npy
+*.zip
+
+# Training results and model weights
+outputs/
+*.pt
+*.pth
+*.onnx
+
+# Python clutter and your local environment
+__pycache__/
+.venv/
+.ipynb_checkpoints/
