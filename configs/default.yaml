@@ -1,0 +1,45 @@
+seed: 42
+num_classes: 87
+run_name: null          # outputs/<run_name>/; null = use the model name
+
+paths:
+  raw_dir: data
+  labels_csv: data/NIPS4B_BIRD_CHALLENGE_TRAIN_LABELS/numero_file_train.csv
+  species_csv: data/NIPS4B_BIRD_CHALLENGE_TRAIN_LABELS/nips4b_birdchallenge_espece_list.csv
+  processed_dir: data/processed     # spectrograms from the data team
+  folds_csv: data/folds.csv
+  output_dir: outputs
+
+audio:                  # agreed conventions
+  sample_rate: 22050
+  duration: 10.0
+  n_mels: 128
+
+cv:
+  n_folds: 5
+
+model:
+  name: efficientnet_b0
+  pretrained: true
+  drop_rate: 0.3
+
+train:
+  fold: 0               # validation fold; -1 = all folds
+  epochs: 30
+  batch_size: 32
+  lr: 1.0e-3
+  weight_decay: 1.0e-2
+  scheduler: onecycle   # onecycle | cosine
+  loss: bce             # bce | focal
+  mixup_alpha: 0.0      # 0 = off
+  monitor: micro_auc    # metric for early stopping and best checkpoint
+  patience: 7
+  num_workers: 0        # 0 is safest on Windows
+  amp: true             # mixed precision, only used on a GPU
+
+augment:
+  time_shift: true
+  freq_masks: 2
+  freq_mask_width: 16
+  time_masks: 2
+  time_mask_width: 30
