@@ -1,5 +1,6 @@
 # Data and big files: never go to GitHub
 data/*
+!data/folds.csv
 *.wav
 *.npy
 *.zip
