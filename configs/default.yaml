@@ -14,6 +14,18 @@ audio:                  # agreed conventions
   sample_rate: 22050
   duration: 10.0
   n_mels: 128
+  # spectrogram details (src/data/spectrogram.py)
+  n_fft: 1024           # FFT window, in samples
+  hop_length: 256       # step between frames, in samples
+  fmin: 100.0           # drops wind / handling rumble below this
+  fmax: null            # null = sample_rate / 2
+  top_db: 80.0          # log-mel floor: loudest point minus this many dB
+
+clean:                  # optional heavy cleaning (ablation row), src/data/clean_spectrograms.py
+  out_dir: data/processed_clean
+  threshold: 1.5        # keep energy above this x noise spread (higher = removes more)
+  median_size: [3, 5]   # speckle filter (mel bands, time frames)
+  min_blob_pixels: 40   # delete regions smaller than this
 
 cv:
   n_folds: 5
